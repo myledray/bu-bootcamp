@@ -1,0 +1,179 @@
+Activity Overview
+You are going to build a program that reads a file of student scores, computes statistics, and writes a summary report. This is a complete, practical program. It uses every concept from this module: variables, types, control flow, methods, arrays, file reading, file writing, and exception handling. 
+
+By the time you finish, you will have a program that does something genuinely useful, and you will have practiced the full development cycle: write, compile, test with good input, test with bad input, fix, and submit. 
+
+
+
+What the Program Does 
+Reads a text file called scores.txt, where each line contains one integer score (0 to 100). 
+Calculates the average score, the highest score, and the lowest score. 
+Counts how many scores fall into each grade band: A (90 and above), B (80 to 89), C (70 to 79), D (60 to 69), F (below 60). 
+Handles empty files and invalid lines gracefully, printing a warning for each bad line instead of crashing. 
+Writes a formatted summary report to a file called report.txt 
+Prints the summary to the terminal as well. 
+ 
+
+What You Will Submit 
+Your GradeAnalyzer.java source file. 
+Your scores.txt test file. 
+A screenshot of the program running in the terminal showing the summary output. 
+Upload all three as PDFs to the submission area at the end of this page.
+ 
+
+Step-by-Step Instructions
+Step 1: Create the Project Folder and Test Data File
+Open your terminal and navigate to your bootcamp folder.  
+Create a folder for this module: mkdir module2, then cd module2  
+Open VS Code in this folder: code 
+Create a file called scores.txt and add:
+At least 10 scores, one per line,
+At least one non-number line (like “oops”), and
+One blank line to test your error handling. 
+For example:
+88
+92
+76
+45
+100
+63
+81
+57
+94
+72
+oops
+ 
+85
+ 
+
+Step 2: Create GradeAnalyzer.java and Write the Skeleton
+Create a new file called GradeAnalyzer.java in your module2 folder.  
+Start with the following code structure, then fill in each method one at a time. 
+Compile after each one. Do not wait until everything is written to compile. 
+import java.io.*; 
+import java.util.ArrayList;
+ 
+public class GradeAnalyzer {
+ 
+    public static void main(String[] args) {
+        // Step 1: read scores from file
+        // Step 2: calculate statistics
+        // Step 3: write and print report
+    } 
+ 
+    // Returns a list of valid scores read from the file
+    public static ArrayList<Integer> readScores(String filename) {
+        // your code here
+    }
+ 
+    // Returns the average of a list of scores, or 0.0 if the list is empty
+    public static double calculateAverage(ArrayList<Integer> scores) {
+        // your code here
+    } 
+ 
+    // Writes and prints the report
+    public static void writeReport(ArrayList<Integer> scores,
+                                   double avg, int high, int low,
+                                   String outputFile) {
+        // your code here
+    }
+} 
+ 
+
+Step 3: Implement readScores 
+Use BufferedReader and a while loop to read the file line by line.  
+For each line, call line.trim() first to remove whitespace.  
+Skip blank lines (check if the trimmed line is empty with .isEmpty()).
+Use Integer.parseInt inside a try-catch to parse each line.  
+If parseInt throws NumberFormatException, print a warning and skip that line.  
+Add valid scores to an ArrayList and return it when done. 
+ 
+
+Step 4: Implement calculateAverage
+If the scores list is empty, return 0.0 immediately.  
+Otherwise, loop through all scores and accumulate the total in a double variable.  
+Return the total divided by scores.size() 
+Test this method by calling it from main with a small, hardcoded list before connecting it to the file reader. 
+ 
+
+Step 5: Find the Highest and Lowest Scores
+Write these directly in main (they do not need their own methods for this exercise).  
+Initialize highest to Integer.MIN_VALUE and lowest to Integer.MAX_VALUE  
+Loop through the scores list and update both as you go.  
+ 
+
+Tip: Collections.max(scores) and Collections.min(scores) exist in java.util.Collections, but implement the loop manually this time to practice control flow. 
+
+ 
+
+Step 6: Count the Grade Bands
+Create 5 int counters: countA, countB, countC, countD, and countF, all starting at 0.  
+Loop through the scores list once.  
+Use if, else if, and else to assign each score to the correct band and increment the counter.  
+Grade bands: A = 90+, B = 80 to 89, C = 70 to 79, D = 60 to 69, F = below 60. 
+ 
+Step 7: Implement writeReport
+Use BufferedWriter and FileWriter to write to report.txt  
+Format the report neatly. Use String.format() for aligned columns.  
+For example:   
+writer.write(String.format("Average score: %.2f%n", avg)); writer.write(String.format("Highest score: %d%n", high));   
+
+Print the same lines to the terminal using System.out.println  
+Include the grade band counts in the report. 
+Your report does not need to look exactly like the example below, but it should be clearly formatted and easy to read.
+
+
+=== Grade Analysis Report ===
+Total scores processed:  13
+Invalid lines skipped:    2 
+ 
+Average score:   77.36
+Highest score:   100
+Lowest score:     45
+ 
+Grade distribution:
+  A (90-100):   3
+  B (80-89):    3
+  C (70-79):    2
+  D (60-69):    2
+  F (below 60): 3 
+Step 8: Test with Edge Cases
+Test 1 (normal): Run with your original scores.txt and verify the report looks correct.  
+Test 2 (empty file): Create an empty scores.txt and confirm the program handles it gracefully, printing a message rather than crashing.  
+Test 3 (all invalid): Fill scores.txt with only non-number lines and confirm every line is warned and skipped.  
+Test 4 (single score): Put just one number in the file and confirm that all statistics are correct.  
+If any test causes a crash or wrong output, fix it before submitting. 
+ 
+
+Step 9: Take Your Screenshot
+Make sure your terminal shows the complete program run from start to finish.  
+The screenshot must include:  
+The command used to run the program: java GradeAnalyzer  
+The full report output is printed to the terminal.  
+Ideally, at least one warning line showing a skipped invalid entry.  
+Screenshot methods 
+On Windows: use Win+Shift+S to capture part of your screen.  
+On Mac: use Cmd+Shift+4 to select an area.  
+On Linux: use the screenshot tool for your desktop environment. 
+ 
+
+Step 10: Convert and Submit
+In the textbox below: 
+
+Upload your GradeAnalyzer.java file as a PDF. 
+Open the file in VS Code, then go to File > Print.  
+In the print dialog, select Save as PDF / Microsoft Print to PDF. 
+Upload your scores.txt file as a PDF. 
+File > Print > Save as PDF 
+Upload your terminal screenshot as a PDF. 
+If your environment is not working and you cannot reach this point, post in Piazza right away. Do not wait. Your cohort and the course team are there to help. 
+
+
+Submit or Save
+Click the Submit button at the bottom right of this page to complete your assignment submission.
+Submit your activity by 11:59 PM ET on the due date.
+If you need time to review learning materials to refresh your knowledge, click the Save and Close button at the bottom right of this page to come back later and finish the submission.
+
+
+Attempts
+You have one attempt.
