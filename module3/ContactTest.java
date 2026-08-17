@@ -1,23 +1,31 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*; 
-
+ 
 public class ContactTest {
-    @Test 
-  void constructor_setsNameCorrectly() { 
-    Contact c = new Contact("Alice", "123-456-7890"); 
-    assertEquals("Alice", c.getName()); 
+ 
+ private Contact contact; 
+ 
+  @BeforeEach
+  void setUp() {
+    contact = new Contact("Ada Lovelace", "+1 617 555 0101");
   } 
  
   @Test
-  void constructor_setsPhoneCorrectly() { 
-    Contact c = new Contact("Bob", "987-654-3210"); 
-    assertEquals("987-654-3210", c.getPhoneNumber()); 
+  void getName_returnsCorrectName() {
+    assertEquals("Ada Lovelace", contact.getName());
   } 
  
   @Test
-  void getName_returnsExactString_notTransformed() { 
-    Contact c = new Contact("Charlie", "555-555-5555"); 
-    assertEquals("Charlie", c.getName());
+  void getPhone_returnsCorrectPhone() {
+    assertEquals("+1 617 555 0101", contact.getPhoneNumber());
   } 
+ 
+  @Test
+  void toString_containsBothFields() {
+    assertTrue(contact.toString().contains("Ada Lovelace"));
+    assertTrue(contact.toString().contains("+1 617 555 0101"));
+  }
 } 
 
